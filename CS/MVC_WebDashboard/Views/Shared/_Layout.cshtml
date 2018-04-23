@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>@ViewBag.Title</title>
+
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Dashboard },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors }
+    )
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.Dashboard },
+        new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new Script { ExtensionSuite = ExtensionSuite.Editors }
+    )
+
+    <script type="text/javascript" src="Scripts/SaveAsExtension.js"></script>
+    <script type="text/javascript" src="Scripts/DeleteExtension.js"></script>
+
+    <script type="text/html" id="dx-dshd-form-save-as">
+        <!-- ko with: findExtension("dxdde-save-as") -->
+        <div data-bind="dxTextBox: { value: newName }"></div>
+        <div data-bind="dxButton: { text: 'Save as', onClick: saveAs }"></div>
+        <!-- /ko -->
+    </script>
+
+    <script type="text/javascript">
+        function onInit(sender, args) {
+            var wdc = sender.getDesigner();
+            wdc.registerExtension(new SaveAsDashboardExtension(sender));
+            wdc.registerExtension(new DeleteDashboardExtension(sender));
+        }
+    </script>
+</head>
+
+<body>
+    @RenderBody()
+</body>
+</html>

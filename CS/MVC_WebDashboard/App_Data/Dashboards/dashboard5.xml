@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard>
+  <Title Text="New Name 7" />
+  <DataSources>
+    <SqlDataSource ComponentName="DataSource1">
+      <Name>Invoices</Name>
+      <Connection Name="northwind" FromAppConfig="true" />
+      <Query Type="SelectQuery" Name="Invoices">
+        <Tables>
+          <Table Name="Invoices" />
+        </Tables>
+        <Columns>
+          <Column Table="Invoices" Name="ShipName" />
+          <Column Table="Invoices" Name="ShipAddress" />
+          <Column Table="Invoices" Name="ShipCity" />
+          <Column Table="Invoices" Name="ShipRegion" />
+          <Column Table="Invoices" Name="ShipPostalCode" />
+          <Column Table="Invoices" Name="ShipCountry" />
+          <Column Table="Invoices" Name="CustomerID" />
+          <Column Table="Invoices" Name="CustomerName" />
+          <Column Table="Invoices" Name="Address" />
+          <Column Table="Invoices" Name="City" />
+          <Column Table="Invoices" Name="Region" />
+          <Column Table="Invoices" Name="PostalCode" />
+          <Column Table="Invoices" Name="Country" />
+          <Column Table="Invoices" Name="Salesperson" />
+          <Column Table="Invoices" Name="OrderID" />
+          <Column Table="Invoices" Name="OrderDate" />
+          <Column Table="Invoices" Name="RequiredDate" />
+          <Column Table="Invoices" Name="ShippedDate" />
+          <Column Table="Invoices" Name="ShipperName" />
+          <Column Table="Invoices" Name="ProductID" />
+          <Column Table="Invoices" Name="ProductName" />
+          <Column Table="Invoices" Name="UnitPrice" />
+          <Column Table="Invoices" Name="Quantity" />
+          <Column Table="Invoices" Name="Discount" />
+          <Column Table="Invoices" Name="ExtendedPrice" />
+          <Column Table="Invoices" Name="Freight" />
+        </Columns>
+      </Query>
+      <ConnectionOptions CloseConnection="true" CommandTimeout="0" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Grid ComponentName="gridDashboardItem1" Name="Grid 1" DataSource="DataSource1" DataMember="Invoices">
+      <DataItems>
+        <Dimension DataMember="Country" DefaultId="DataItem0" />
+        <Measure DataMember="ExtendedPrice" DefaultId="DataItem1" />
+      </DataItems>
+      <GridColumns>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridMeasureColumn>
+          <Measure DefaultId="DataItem1" />
+        </GridMeasureColumn>
+      </GridColumns>
+      <GridOptions />
+    </Grid>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutItem DashboardItem="gridDashboardItem1" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

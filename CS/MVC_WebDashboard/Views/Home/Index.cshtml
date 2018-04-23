@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "MVCxDashboard";
+}
+
+@Html.DevExpress().Dashboard(settings => {
+    settings.Name = "Dashboard";
+    settings.ClientSideEvents.Init = "onInit";
+}).GetHtml()
+
+
