@@ -1,3 +1,14 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [HomeController.cs](./CS/MVC_WebDashboard/Controllers/HomeController.cs)
+* [Global.asax.cs](./CS/MVC_WebDashboard/Global.asax.cs)
+* [CustomDashbboardStorage.cs](./CS/MVC_WebDashboard/Models/CustomDashbboardStorage.cs)
+* [DeleteExtension.js](./CS/MVC_WebDashboard/Scripts/DeleteExtension.js)
+* [SaveAsExtension.js](./CS/MVC_WebDashboard/Scripts/SaveAsExtension.js)
+* [Index.cshtml](./CS/MVC_WebDashboard/Views/Home/Index.cshtml)
+* [_Layout.cshtml](./CS/MVC_WebDashboard/Views/Shared/_Layout.cshtml)
+<!-- default file list end -->
 # MVC Dashboard - How to define extensions providing the Save As and Delete functionality
 
 
