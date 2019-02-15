@@ -9,74 +9,19 @@
 * [Index.cshtml](./CS/MVC_WebDashboard/Views/Home/Index.cshtml)
 * [_Layout.cshtml](./CS/MVC_WebDashboard/Views/Shared/_Layout.cshtml)
 <!-- default file list end -->
-# MVC Dashboard - How to define extensions providing the Save As and Delete functionality
+# MVC Dashboard - How to implement Save As and Delete functionality by creating custom extensions
 
+This example demonstrates how to add the "Save As" and "Delete" [menu items](https://docs.devexpress.com/Dashboard/117444) to the Web Dashboard's UI by implementing the corresponding [custom extensions](https://docs.devexpress.com/Dashboard/117543):
 
-<p>This example demonstrates how to add the "Save As" and "Delete" options to the MVC Dashboard control.<br>It requires only a few changes to utilize the solution described in the <a href="https://www.devexpress.com/Support/Center/p/T466716">T466716: Web Dashboard - How to work with extensions</a> article in MVC:<br><br>1. Use the <a href="https://documentation.devexpress.com/Dashboard/DevExpressDashboardWebDashboardConfigurator_SetDashboardStoragetopic.aspx">SetDashboardStorage</a> method to define the default storage:</p>
+* The "Save As" menu item allows end-users to save the current dashboard with a new name.
+* The "Delete" menu item deletes the opened dashboard from the [dashboard storage](https://docs.devexpress.com/Dashboard/116299).
 
+The image below shows the result of the extensions implementation.
 
-```cs
-protected void Application_Start() {
-    //...
-    DashboardConfigurator.Default.SetDashboardStorage(new DashboardFileStorage(Server.MapPath("~/App_Data/Dashboards")));
-    //...
-}
-```
+![](readme.png)
 
+## See Also
 
-<p> </p>
-<p>2. Handle the client-side <a href="https://documentation.devexpress.com/#Dashboard/DevExpressDashboardWebScriptsASPxClientDashboard_BeforeRendertopic">BeforeRender</a> event using the <a href="https://documentation.devexpress.com/#Dashboard/DevExpressDashboardWebMvcDashboardExtensionSettings_ClientSideEventstopic">DashboardExtensionSettings.ClientSideEvents</a> property:</p>
-
-
-```cs
-@Html.DevExpress().Dashboard(settings => {
-    settings.Name = "Dashboard";
-    settings.ClientSideEvents.BeforeRender = "onBeforeRender";
-}).GetHtml()
-
-```
-
-
-<p> </p>
-<p>3. Define a controller action that should be used to delete dashboards:</p>
-
-
-```cs
-public ActionResult DeleteDashboard(string DashboardID) {
-    CustomDashboardFileStorage newDashboardStorage = new CustomDashboardFileStorage(@"~/App_Data/Dashboards");
-    newDashboardStorage.DeleteDashboard(DashboardID);
-    return new EmptyResult();
-}
-
-```
-
-
-<p><br>4. Customize the DeleteDashboardExtension.deleteDashboard function to call the server-side DeleteDashboard action using AJAX:</p>
-
-
-```js
-    this.deleteDashboard = function () {
-        if (_this.isExtensionAvailable()) {
-            if (confirm("Delete this Dashboard?")) {
-                var dashboardid = _this._control.dashboardContainer().id;
-                var param = JSON.stringify({ DashboardID: dashboardid, ExtensionName: _this.name });
-                _this._toolbox.menuVisible(false);
-                $.ajax({
-                    url: 'Home/DeleteDashboard',
-                    data: { DashboardID: dashboardid },
-                    type: 'POST',
-                }).success(function () {
-                    _this._control.close();
-                });
-            }
-        }
-    }
-
-```
-
-
-<p> <br><strong>See also:</strong><br><a href="https://www.devexpress.com/Support/Center/p/T466761">T466761: Web Dashboard - How to implement the Save As and Delete functionality by creating custom extensions</a><br><a href="https://www.devexpress.com/Support/Center/p/T601084">T601084: ASP.NET Core Dashboard - How to implement the Save As and Delete functionality by creating custom extensions</a></p>
-
-<br/>
-
+- [Web Forms Dashboard - How to implement the Save As and Delete functionality by creating custom extensions](https://github.com/DevExpress-Examples/web-dashboard-how-to-implement-save-as-and-delete-by-creating-custom-extensions-t466761)
+- [ASP.NET Core Dashboard - How to implement the Save As and Delete functionality by creating custom extensions](https://github.com/DevExpress-Examples/aspnet-core-dashboard-how-to-implement-the-save-as-and-delete-functionality-by-creating-cu-t601084)
 
