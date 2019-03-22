@@ -1,8 +1,8 @@
 ﻿// Creates and implements a custom DeleteDashboardExtension class.
 
-function DeleteDashboardExtension(_control) {
+function DeleteDashboardExtension(dashboardControl) {
     var _this = this;    
-    this._control = _control;
+    this._control = dashboardControl;
     this._toolbox = this._control.findExtension('toolbox');
     this.name = "dxdde-delete-dashboard";
     this.deleteDashboard = function () {
