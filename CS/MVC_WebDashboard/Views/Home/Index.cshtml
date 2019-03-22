@@ -1,12 +1,28 @@
 ﻿@{
     ViewBag.Title = "MVCxDashboard";
 }
-
-@Html.DevExpress().Dashboard(settings => {
-    settings.Name = "Dashboard";
-    settings.Width = Unit.Percentage(100);
-    settings.Height = Unit.Percentage(100);
-    settings.ClientSideEvents.BeforeRender = "onBeforeRender";
-}).GetHtml()
-
-
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/SaveAsExtension.js"></script>
+    <script type="text/javascript" src="~/Scripts/DeleteExtension.js"></script>
+    <!-- Defines the "Save As" extension template. -->
+    <script type="text/html" id="dx-save-as-form">
+        <div>Dashboard Name:</div>
+        <div style="margin: 10px 0" data-bind="dxTextBox: { value: newName }"></div>
+        <div data-bind="dxButton: { text: 'Save', onClick: saveAs }"></div>
+    </script>
+    <script type="text/javascript">
+        function onBeforeRender(sender) {
+            var dashboardControl = sender.GetDashboardControl();
+            dashboardControl.registerExtension(new SaveAsDashboardExtension(dashboardControl));
+            dashboardControl.registerExtension(new DeleteDashboardExtension(dashboardControl));
+        }
+    </script>
+}
+<div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+    @Html.DevExpress().Dashboard(settings => {
+        settings.Name = "Dashboard";
+        settings.Width = Unit.Percentage(100);
+        settings.Height = Unit.Percentage(100);
+        settings.ClientSideEvents.BeforeRender = "onBeforeRender";
+    }).GetHtml()
+</div>

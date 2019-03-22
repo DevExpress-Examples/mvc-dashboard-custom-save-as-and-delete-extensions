@@ -1,10 +1,8 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="UTF-8" />
     <title>@ViewBag.Title</title>
-
     @Html.DevExpress().GetStyleSheets(
         new StyleSheet { ExtensionSuite = ExtensionSuite.Dashboard },
         new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
@@ -15,29 +13,9 @@
         new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
         new Script { ExtensionSuite = ExtensionSuite.Editors }
     )
-
-    <script type="text/javascript" src="Scripts/SaveAsExtension.js"></script>
-    <script type="text/javascript" src="Scripts/DeleteExtension.js"></script>
-
-    <!-- Defines the "Save As" extension template. -->
-    <script type="text/html" id="dx-save-as-form">
-        <div>Dashboard Name:</div>
-        <div style="margin: 10px 0" data-bind="dxTextBox: { value: newName }"></div>
-        <div data-bind="dxButton: { text: 'Save', onClick: saveAs }"></div>
-    </script>
-
-    <script type="text/javascript">
-        function onBeforeRender(sender) {
-            var control = sender.getDashboardControl();
-            control.registerExtension(new SaveAsDashboardExtension(control));
-            control.registerExtension(new DeleteDashboardExtension(sender));
-        }
-    </script>
+    @RenderSection("Scripts", required: false)
 </head>
-
 <body>
-    <div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
-        @RenderBody()
-    </div>
+    @RenderBody()
 </body>
 </html>

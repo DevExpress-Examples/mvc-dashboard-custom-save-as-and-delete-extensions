@@ -1,9 +1,8 @@
 ﻿// Creates and implements a custom DeleteDashboardExtension class.
 
-function DeleteDashboardExtension(_wrapper) {
-    var _this = this;
-    this._wrapper = _wrapper;
-    this._control = _wrapper.GetDashboardControl();
+function DeleteDashboardExtension(_control) {
+    var _this = this;    
+    this._control = _control;
     this._toolbox = this._control.findExtension('toolbox');
     this.name = "dxdde-delete-dashboard";
     this.deleteDashboard = function () {
@@ -13,7 +12,7 @@ function DeleteDashboardExtension(_wrapper) {
                 var param = JSON.stringify({ DashboardID: dashboardid, ExtensionName: _this.name });
                 _this._toolbox.menuVisible(false);
                 $.ajax({
-                    url: 'Home/DeleteDashboard',
+                    url: 'DeleteDashboard',
                     data: { DashboardID: dashboardid },
                     type: 'POST',
                 }).success(function () {
