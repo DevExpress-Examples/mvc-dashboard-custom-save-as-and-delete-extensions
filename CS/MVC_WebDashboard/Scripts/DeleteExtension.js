@@ -1,45 +1,35 @@
-﻿// Creates and implements a custom DeleteDashboardExtension class.
-
-function DeleteDashboardExtension(dashboardControl) {
-    var _this = this;    
-    this._control = dashboardControl;
-    this._toolbox = this._control.findExtension('toolbox');
+﻿function DeleteDashboardExtension(dashboardControl) {
+    this._dashboardControl = dashboardControl;
     this.name = "dxdde-delete-dashboard";
-    this.deleteDashboard = function () {
-        if (_this.isExtensionAvailable()) {
-            if (confirm("Delete this Dashboard?")) {
-                var dashboardid = _this._control.dashboardContainer().id;
-                var param = JSON.stringify({ DashboardID: dashboardid, ExtensionName: _this.name });
-                _this._toolbox.menuVisible(false);
-                $.ajax({
-                    url: 'DeleteDashboard',
-                    data: { DashboardID: dashboardid },
-                    type: 'POST',
-                }).success(function () {
-                    _this._control.close();
-                });
-            }
-        }
-    }
     this._menuItem = {
         id: this.name,
         title: "Delete",
-        click: this.deleteDashboard,
+        click: this.deleteDashboard.bind(this),
         selected: ko.observable(false),
-        disabled: ko.computed(function () { return !_this._control.dashboard(); }),
+        disabled: ko.computed(function () { return !this._dashboardControl.dashboard(); }, this),
         index: 113,
         hasSeparator: true,
-        data: _this
+        data: this
     };
 }
-DeleteDashboardExtension.prototype.isExtensionAvailable = function () {
-    return this._toolbox !== undefined;
+DeleteDashboardExtension.prototype.deleteDashboard = function () {
+    if (this._toolbox) {
+        if (confirm("Delete this Dashboard?")) {
+            var dashboardid = this._dashboardControl.dashboardContainer().id;
+            this._toolbox.menuVisible(false);
+            $.ajax({
+                url: 'Home/DeleteDashboard',
+                data: { DashboardID: dashboardid },
+                type: 'POST',
+                success: (function() { this._dashboardControl.unloadDashboard(); }).bind(this)
+            });
+        }
+    }
 }
 DeleteDashboardExtension.prototype.start = function () {
-    if (this.isExtensionAvailable())
-        this._toolbox.menuItems.push(this._menuItem);
+    this._toolbox = this._dashboardControl.findExtension('toolbox');
+    this._toolbox && this._toolbox.menuItems.push(this._menuItem);
 };
 DeleteDashboardExtension.prototype.stop = function () {
-    if (this.isExtensionAvailable())
-        this._toolbox.menuItems.remove(this._menuItem);
+    this._toolbox && this._toolbox.menuItems.remove(this._menuItem);
 };
