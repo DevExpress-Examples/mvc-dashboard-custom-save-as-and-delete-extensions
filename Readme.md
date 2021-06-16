@@ -24,7 +24,7 @@ The image below shows the result of the extensions implementation.
 
 - [Integrate the Dashboard Extension into a Project](https://docs.devexpress.com/Dashboard/116420/web-dashboard/aspnet-mvc-dashboard-extension/integrate-the-dashboard-extension-into-a-project)
 
-## See Also
+## More Examples
 
 - [Web Forms Dashboard - How to implement the Save As and Delete functionality by creating custom extensions](https://github.com/DevExpress-Examples/web-dashboard-how-to-implement-save-as-and-delete-by-creating-custom-extensions-t466761)
 - [ASP.NET Core Dashboard - How to implement the Save As and Delete functionality by creating custom extensions](https://github.com/DevExpress-Examples/aspnet-core-dashboard-how-to-implement-the-save-as-and-delete-functionality-by-creating-cu-t601084)
