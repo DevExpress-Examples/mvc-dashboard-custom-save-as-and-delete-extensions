@@ -19,7 +19,7 @@ To add this functionality to your application, [add](./CS/MVC_WebDashboard/Views
 These extensions also require server configuration.
 
 <!-- default file list -->
-## Files to look At
+## Files to Look At
 
 * [DeleteExtension.js](./CS/MVC_WebDashboard/Scripts/DeleteExtension.js)
 * [SaveAsExtension.js](./CS/MVC_WebDashboard/Scripts/SaveAsExtension.js)
