@@ -4,7 +4,7 @@ using DevExpress.DashboardWeb.Mvc;
 
 public class DashboardConfig {
     public static void RegisterService(RouteCollection routes) {
-        routes.MapDashboardRoute();
+        routes.MapDashboardRoute("dashboardControl", "DefaultDashboard");
 
         // Uncomment this line to save dashboards to the App_Data folder.
         //DashboardConfigurator.Default.SetDashboardStorage(new DashboardFileStorage(@"~/App_Data/"));
