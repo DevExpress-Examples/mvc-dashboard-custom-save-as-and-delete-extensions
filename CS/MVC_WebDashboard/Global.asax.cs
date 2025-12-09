@@ -14,15 +14,13 @@ namespace MVC_WebDashboard {
     public class MvcApplication : System.Web.HttpApplication {
         protected void Application_Start() {
             DashboardConfig.RegisterService(RouteTable.Routes);
-
             DashboardConfigurator.Default.SetDashboardStorage(new DashboardFileStorage(Server.MapPath("~/App_Data/Dashboards")));
-
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
+            
             ModelBinders.Binders.DefaultBinder = new DevExpress.Web.Mvc.DevExpressEditorsBinder();
 
             DevExpress.Web.ASPxWebControl.CallbackError += Application_Error;
